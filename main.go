@@ -1,5 +1,7 @@
 package main
 
+import "tripstory/cmd"
+
 func main() {
-	// Create a new instance of the struct
+	cmd.Execute()
 }
