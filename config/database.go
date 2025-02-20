@@ -2,6 +2,8 @@ package config
 
 import (
 	"fmt"
+	"tripstory/database/seeds"
+
 	"github.com/rs/zerolog/log"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -31,6 +33,8 @@ func (cfg Config) ConnectionPostgress() (*Postgres, error) {
 		log.Error().Err(err).Msg("[ConnectionPostgress-2] Error connecting to database" + cfg.Psql.Host)
 		return nil, err
 	}
+
+	seeds.SeedRoles(db)
 
 	sqlDB.SetMaxOpenConns(cfg.Psql.DBMaxOpen)
 	sqlDB.SetMaxIdleConns(cfg.Psql.DBMaxIdle)
